@@ -1,7 +1,52 @@
+###Not run--how certain data created...
+###Cell_Data<-read.csv('CELL_DATA.csv')
+##library(fields)
+#DummyX<-Cell_Data$X/100000
+#DummyY<-Cell_Data$Y/100000
+##knots<-cover.design(cbind(DummyX, DummyY), 30)
+##omega.all <- (rdist(knots$design, knots$design)/5)^3
+##svd.omega.all <- svd(omega.all)
+##sqrt.omega.all <- t(svd.omega.all$v %*% (t(svd.omega.all$u)*sqrt(svd.omega.all$d)))
+##Z.k <- (rdist(cbind(DummyX, DummyY), knots$design)/5)^3
+##Z.matrix <- t(solve(sqrt.omega.all, t(Z.k))) ##Basis functions below have been re-transposed
+
+## Generate neighborhood data and pairwise differences
+## librray(spdep)
+#CelLNB<-dnearneigh(as.matrix(Cell_Data[, c(65, 66)]), 0, 10000)
+#CELL_NB_WB<-nb2WB(CelLNB)
+
+#Neighinfo<-matrix(NA, 6050, 12)
+#for (i in 1:6050){
+#  Neighinfo[i, 1:CELL_NB_WB$num[i]]<-as.vector(CelLNB[[i]])
+#}
+
+#Cell_Data$Forest<-Cell_Data$NLCDConif+Cell_Data$NLCDDecid+Cell_Data$NLCDMixed
+
+#Neighinfo<-matrix(NA, 6050, 12)
+#for (i in 1:6050){
+#  Neighinfo[i, 1:CELL_NB_WB$num[i]]<-as.vector(CelLNB[[i]])
+#}
+
+
+#diff.cov<-matrix(NA, 6050, 12)
+#for (i in 1:6050){
+#  diff.cov[i, 1:CELL_NB_WB$num[i]]<-as.vector(Cell_Data_For_RSE2$Forest[i]-Cell_Data_For_RSE2$Forest[CelLNB[[i]]])
+#}
+
+#diff.cov2<-matrix(NA, 6050, 12)
+#for (i in 1:6050){
+#  diff.cov2[i, 1:CELL_NB_WB$num[i]]<-as.vector(Cell_Data_For_RSE2$NLCDWwet[i]-Cell_Data_For_RSE2$NLCDWwet[CelLNB[[i]]])
+#}
+
+##Cell_Data$Forest<-scale(Cell_Data$Forest)
+##Cell_Data$FW<-scale(Cell_Data$NLCDWwet)
+
+
+
 
 ###Read data...
-diff.cov<-read.csv('diffusioncovForest.csv') ###the difference in scaled % Forest between a cell (column) and its neighbors
-diff.cov2<-read.csv('diffusioncovFW.csv') ###the difference in scaled % Forested Wetland between a cell (column) and its neighbors
+diff.cov<-read.csv('diffusioncovForest.csv') ###the difference in  % Forest between a cell (column) and its neighbors
+diff.cov2<-read.csv('diffusioncovFW.csv') ###the difference in  % Forested Wetland between a cell (column) and its neighbors
 NN<-read.csv('NN.csv') ###the cell ID of a given cell's neighbors
 numn<-read.csv( 'numn.csv') ###how many neighbors a cell has
 B.space<-read.csv('BasisFunctions.csv') ###basis function for cells
