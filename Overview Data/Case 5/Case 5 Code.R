@@ -1,8 +1,8 @@
 
 library(dismo)
-read.csv("DeerDetects2018.csv")
+DeerDetects2018<-read.csv("DeerDetects2018.csv")
 
-gbm_deer_MS_2018<-gbm.step(data=DeerDetects2018GBM_SP@data, 
+gbm_deer_MS_2018<-gbm.step(data=DeerDetects2018, 
                            gbm.x=c("MaxEVI","MinEVI",
                                    "SOSEVI","EOSEVI","LOSEVI","MaxNDVI","MinNDVI","SOSNDVI","EOSNDVI","LOSNDVI",
                                    "EdgeDensity", "Nightlight", "AgIndex", "CoreArea", "JanLST", "JanMaxSnow",
@@ -32,7 +32,7 @@ gbm_deer_MS_2018<-gbm.step(data=DeerDetects2018GBM_SP@data,
                                    "propJPine10km", "propRPine10km", "propWater10km", "propSMaple10km", "propCHW10km", "propNHW10km", "Wetland10km", "propSpruceFir10km",
                                    "ShannonL310km", "RichnessL310km","IntEVI10km", "X", "Y"), 
                            gbm.y="CPUE", 
-                           family="gaussian",    tree.complexity=5, learning.rate=0.01, bag.fraction=.5)
+                           family="gaussian",    tree.complexity=5, learning.rate=0.001, bag.fraction=.5)
 
 
 ###not Run, as with case 3, stacked layers wayyy too large to store on github.
