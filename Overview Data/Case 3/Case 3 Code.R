@@ -72,7 +72,10 @@ gbm_OPOSSUM_MS<-gbm.step(data=Cam_Loc_Summary_Env,
                          tree.complexity=5, learning.rate=0.01, bag.fraction=.5)
 
 ###example prediction
-Lyrs<-raster::stack('SW.lyr.grd')
+###Lyrs<-raster::stack('SW.lyr.grd')
+###stacked grid of predictors way too large for github, 
+###but will be accessible once moved to alternative archive.
+
 pOpossum_MS<-predict(Lyrs, gbm_Opossum_MS, n.trees=gbm_Opossum_MS$gbm.call$best.trees, type='response', filename="Opossum_Distribution.tif", overwrite=TRUE)
 
 plot(pOpossum_MS)
@@ -111,3 +114,13 @@ gbm_COYOTE_MS<-gbm.step(data=Cam_Loc_Summary_Env,
                         , gbm.y="COYOTEDetsPA", 
                         family="bernoulli",
                         tree.complexity=5, learning.rate=0.01, bag.fraction=.5)
+
+###Briefly, creation of spatial layers.
+###Original grid size off 500 x 500 m MODIS pixels used for EVI, NDVI vars.
+###Land Cover proportions use a polygon extraction from base layers (Wiscland2.0).
+###Same extraction used to generate edge density and Shannon, and richness metrics.
+###Richness calculated based on level 3 land classes. 
+###Larger aggregations (e.g., 1km, 5km, 10km suffixes above) derived using raster::focal and raster::focalWeight....
+###...e.g., fw1km<-focalweight(r, 1000, 'circle); Pine1km<-(Pine, fw1km, mean)
+
+
