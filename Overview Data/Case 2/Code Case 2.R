@@ -1,9 +1,23 @@
+##not run, but how certain data created...
+##day<-1:365
+##basis_t<-cSplineDes(day,seq(0, 365, by=73/3))
+
+###BearDayXY<-read.csv('BearDayXY.csv')
+###BearDayXY[, 1]<-scale(BearDayXY[, 1])
+###BearDayXY[, 2]<-scale(BearDayXY[, 2])
+###library(fields) ##unfortunately, should have saved seed--no guarantee knot placement looks the same.
+###knotsBearDay<-cover.design(cbind(BearDayXY[, 1], BearDayXY[, 2]), 30)
+### Define the omega and Z matrices for the random effects (see Crainiceanu et al. 2005)
+###omega.all <- (rdist(knotsBearDay$design, knotsBearDay$design)/5)^3
+###svd.omega.all <- svd(omega.all)
+###sqrt.omega.all <- t(svd.omega.all$v %*% (t(svd.omega.all$u)*sqrt(svd.omega.all$d)))
+###Z.k <- (rdist(cbind(BearDayXY), knotsBearDay$design)/3)^3
+###Z.matrix <- t(solve(sqrt.omega.all, t(Z.k)))
+
+###Note, creation of Forest5km here uses raster::extract(Wiscland, Cell_centroid, buffer=5000))
+###Otherwise, cell covariates compiled based on 500 x 500 m grid extraction. 
+
 ###import data into workspace
-
-
-
-
-
 Trail<-read.csv('Trail.csv')
 Forest5km<-read.csv('Forest5km.csv') ###scaled. mean = 0.521, sd = 0.248
 Forest<-read.csv('Forest.csv')    ###scaled. mean = 0.609, sd = 0.316
