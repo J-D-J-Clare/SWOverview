@@ -143,13 +143,13 @@ gbm_COYOTE_MS<-gbm.step(data=Cam_Loc_Summary_Env,
 #MinEVI
 #SOSEVI
 #EOSEVI
-#LOSEVI
+#LOSEVI --Length of Season = EOS-SOS
 #MaxNDVI
 #MinNDVI
 #SOSNDVI
 #EOSNDVI
 #LOSNDVI
-#IntEVI
+#IntEVI--see Case 4 code for more detailed description.
 ###Climate/Snow
 #JanLST--This is the average land surface--coverted to f--termperature across January from 2001-2017
 #JanMaxSnow--Averaged 8day Maximum Snow Extent sampled across January from 2001-2017.
