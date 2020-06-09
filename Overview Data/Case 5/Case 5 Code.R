@@ -35,11 +35,13 @@ gbm_deer_MS_2018<-gbm.step(data=DeerDetects2018GBM_SP@data,
                            family="gaussian",    tree.complexity=5, learning.rate=0.01, bag.fraction=.5)
 
 
-Lyrs<-raster::stack('SW.lyr.grd')
-DeerCPUE_MS2018<-predict(Lyrs, gbm_deer_MS_2018, n.trees=gbm_deer_MS_2018$gbm.call$best.trees, type='response', filename="DEER_CPUE_MS2018.tif", overwrite=TRUE)
+###not Run, as with case 3, stacked layers wayyy too large to store on github.
+###will be accessible when archive moves. 
+#Lyrs<-raster::stack('SW.lyr.grd')
+#DeerCPUE_MS2018<-predict(Lyrs, gbm_deer_MS_2018, n.trees=gbm_deer_MS_2018$gbm.call$best.trees, type='response', filename="DEER_CPUE_MS2018.tif", overwrite=TRUE)
 
 
 library(maptools)
 WI_DMU<-readShapePoly("DMU.shp")
 WI_DMU<-extract(DeerCPUE_MS2018, WI_DMU, fun=mean, na.rm=T, sp=T)
-cor(WI_DMU$DeerDens18[WI_DMU$DeerDens18!=-999], WI_DMU$DEER_CPUE_MS2018[WI_DMU$DeerDens18!=-999]) ###-999 coded for missing data
+cor(WI_DMU$DeerDens18[WI_DMU$DeerDens18!=-999], exp(WI_DMU$DEER_CPUE_MS2018[WI_DMU$DeerDens18!=-999])) ###-999 coded for missing data
