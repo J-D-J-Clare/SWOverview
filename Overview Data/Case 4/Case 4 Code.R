@@ -4,6 +4,7 @@ Behav_Class<-read.csv('Behav_Class.csv')
 
 library(mgcv)
 ###model for foraging
+###Only uses complete cases.
 m1<-bam(cbind(forage, npics)~TRAIL+te(X, Y, Day, bs=c('cr', 'cr', 'cc'), k=c(5, 5, 20))+s(Camera, bs='re')+
           s(DailyEVI, k=20, bs='cr')+s(DailyResEVI, k=20, bs='cr')+s(IntEVI, k=20, bs='cr')+
           s(DailySnowDepth, k=20, bs='cr')+
@@ -17,6 +18,8 @@ m1<-bam(cbind(forage, npics)~TRAIL+te(X, Y, Day, bs=c('cr', 'cr', 'cc'), k=c(5, 
 
 
 ###model for vigilance
+###Only uses complete cases.
+
 m2<-bam(cbind(vigilant, npics)~TRAIL+te(X, Y, Day, bs=c('cr', 'cr', 'cc'), k=c(5, 5, 20))+s(Camera, bs='re')+
           s(DailyEVI, k=20, bs='cr')+s(DailyResEVI, k=20, bs='cr')+s(IntEVI, k=20, bs='cr')+
           s(DailySnowDepth, k=20, bs='cr')+
