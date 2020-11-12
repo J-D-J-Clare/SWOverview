@@ -183,3 +183,30 @@ fitbearAll_2no_arriv2= jags(data=data, inits=inits, params, model.file="beardiff
 
 
 
+###Derive posterior distribution for occupancy AUC following Zipkin et al. ..
+AUCMat<-matrix(NA, 5200, 4)
+IDX=list() ###unique cells sampled for each year
+IDX[[1]]<-unique(Bear_Colext_2_10_20$ID[Bear_Colext_2_10_20$Year==2015])
+IDX[[2]]<-unique(Bear_Colext_2_10_20$ID[Bear_Colext_2_10_20$Year==2016])
+IDX[[3]]<-unique(Bear_Colext_2_10_20$ID[Bear_Colext_2_10_20$Year==2017])
+IDX[[4]]<-unique(Bear_Colext_2_10_20$ID[Bear_Colext_2_10_20$Year==2018])
+
+###Note, model starts in 2014, so third index below is j+1
+
+for (i in 1:5200){
+  for (j in 1:4){
+    AUCMat[i, 1]<-auc(fitbearAll_2no_arriv2$sims.list$z[i,IDX[[j]],2], fitbearAll_2no_arriv2$sims.list$psi[1,IDX[[j]] ,2])
+    AUCMat[i, 2]<-auc(fitbearAll_2no_arriv2$sims.list$z[i,IDX[[j]],3], fitbearAll_2no_arriv2$sims.list$psi[1,IDX[[j]] ,3])
+    AUCMat[i, 3]<-auc(fitbearAll_2no_arriv2$sims.list$z[i,IDX[[j]],4], fitbearAll_2no_arriv2$sims.list$psi[1,IDX[[j]] ,4])
+    AUCMat[i, 4]<-auc(fitbearAll_2no_arriv2$sims.list$z[i,IDX[[j]],5], fitbearAll_2no_arriv2$sims.list$psi[1,IDX[[j]] ,5])
+  }
+}
+###e.g., 
+quantile(AUCMat[,1], probs=c(.025, .5, .975))
+
+#.915 .973 mean=.951
+#.918, .971 mean=.949
+#.918, .972, mean=.949
+#.903, .968, mean=.941
+
+
