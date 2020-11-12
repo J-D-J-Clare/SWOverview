@@ -98,7 +98,7 @@ write(" //
       real a0_psi; 
       real a1_psi; //the effect of forest
       row_vector[num_basisXY] a_XY;
-      
+      real sigmaxy; //variance in the radial spline basis coefficients
       
       real a_EVI; //effect of evi
       real a_AL;  //effect of availability in previous time period
@@ -194,8 +194,8 @@ write(" //
       // priors
       
       
-      for (b in 1:num_basisXY){ //hiearchical approach here works poorly... 
-        a_XY[b]~normal(0, 1.6);
+      for (b in 1:num_basisXY){ 
+        a_XY[b]~normal(0, sigmaxy);
       } 
       
       
@@ -221,6 +221,7 @@ write(" //
       var_a_day_forest ~ cauchy (0, 1);
       var_a_day_cropland ~ cauchy (0, 1);
       
+      sigmaxy ~ uniform(0, 3) 
       
       //likelihood...
       
